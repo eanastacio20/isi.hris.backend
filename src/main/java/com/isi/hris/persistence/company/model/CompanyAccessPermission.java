@@ -1,5 +1,4 @@
 package com.isi.hris.persistence.company.model;
-// Generated Feb 21, 2022 9:22:39 AM by Hibernate Tools 3.2.4.GA
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,24 +21,18 @@ import lombok.NoArgsConstructor;
 @Table(name = "CompanyAccessPermission")
 public class CompanyAccessPermission {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "profileId", column = @Column(name = "ProfileID", nullable = false)),
 			@AttributeOverride(name = "moduleId", column = @Column(name = "ModuleID", nullable = false)),
-			@AttributeOverride(name = "memberModuleId", column = @Column(name = "MemberModuleID", nullable = false))})
+			@AttributeOverride(name = "memberModuleId", column = @Column(name = "MemberModuleID", nullable = false)) })
 	private CompanyAccessPermissionId id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ProfileID", nullable = false, insertable = false, updatable = false)
 	private CompanyAccessProfile companyAccessProfile;
-	
+
 	@Column(name = "Access", nullable = false, length = 1)
 	private char access;
 
-	
 }

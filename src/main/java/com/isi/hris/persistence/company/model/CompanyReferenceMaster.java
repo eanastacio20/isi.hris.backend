@@ -1,5 +1,4 @@
 package com.isi.hris.persistence.company.model;
-// Generated Feb 21, 2022 9:22:39 AM by Hibernate Tools 3.2.4.GA
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
