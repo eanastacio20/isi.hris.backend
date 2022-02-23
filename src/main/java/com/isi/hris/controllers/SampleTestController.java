@@ -5,15 +5,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.isi.hris.persistence.company.model.CompanyPayCodeMaster;
 import com.isi.hris.persistence.master.model.MasterModule;
+import com.isi.hris.services.DatabaseCreatorService;
 import com.isi.hris.services.SampleTestServices;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @RestController
 @RequestMapping("/isi-hris")
@@ -21,7 +28,10 @@ public class SampleTestController {
 
 	@Autowired
 	SampleTestServices sts;
-	
+
+	@Autowired
+	DatabaseCreatorService dbCreatorService;
+
 	@GetMapping("/test")
 	public List<TestDTO> testMapping() {
 		List<TestDTO> list = new ArrayList<>();
@@ -29,24 +39,34 @@ public class SampleTestController {
 		list.add(new TestDTO(2L, "Juanna Dela Cruz"));
 		return list;
 	}
-	
+
 	@GetMapping("/getCompanyPayCodeMaster")
-	public List<CompanyPayCodeMaster> getCompanyPayCodeMaster(){
+	public List<CompanyPayCodeMaster> getCompanyPayCodeMaster() {
 		return sts.getCompanyPayCodeMasterList();
 	}
-	
+
 	@GetMapping("/getMasterModuleList")
-	public List<MasterModule> getMasterModuleList(){
+	public List<MasterModule> getMasterModuleList() {
 		return sts.getMasterModuleList();
+	}
+
+	@PostMapping
+	public void testCreateDB(@RequestBody DBdto dbdto) {
+		dbCreatorService.createDatabase(dbdto.getHost(), dbdto.getUsername(), dbdto.getPassword(),
+				dbdto.getDbTemplate(), dbdto.getDumpFileDestination(), dbdto.getNewDatabaseName(),
+				dbdto.getCharacterSet());
 	}
 
 	@Data
 	@AllArgsConstructor
 	class TestDTO {
-		
+
 		private Long idno;
 		private String name;
-		
+
 	}
+
+	
+	
 
 }
