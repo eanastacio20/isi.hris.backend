@@ -27,21 +27,21 @@ public class MasterCompanyAuditTrail {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "RecordID", unique = true, nullable = false)
 	private Long recordId;
-	
+
 	@Column(name = "CompanyID", nullable = false)
 	private int companyId;
-	
-	@Column(name = "ActionType", length = 4)
+
+	@Column(name = "ActionType", columnDefinition = "ENUM('ADD','EDIT')", length = 4)
 	private String actionType;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "LastModifiedTimeStamp", nullable = false, length = 26)
 	private Date lastModifiedTimeStamp;
-	
+
 	@Column(name = "LastModifiedByUserID", nullable = false)
 	private int lastModifiedByUserId;
-	
-	@Column(name = "Remarks", length = 65535)
+
+	@Column(name = "Remarks", columnDefinition = "text", length = 65535)
 	private String remarks;
-	
+
 }

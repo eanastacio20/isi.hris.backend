@@ -38,7 +38,7 @@ public class MasterMountDetails {
 	@Column(name = "ShareFolderName", nullable = false, length = 50)
 	private String shareFolderName;
 
-	@Column(name = "ShareType", nullable = false, length = 20)
+	@Column(name = "ShareType", columnDefinition = "ENUM('cifs (Windows Share)','nfs')", nullable = false, length = 20)
 	private String shareType;
 
 	@Column(name = "Username", length = 50)

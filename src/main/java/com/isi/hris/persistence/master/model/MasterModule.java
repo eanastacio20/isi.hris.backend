@@ -23,59 +23,59 @@ public class MasterModule {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "ModuleID", unique = true, nullable = false)
 	private Short moduleId;
-	
+
 	@Column(name = "FullDisplayName", unique = true, length = 50)
 	private String fullDisplayName;
-	
-	@Column(name = "Description", length = 65535)
+
+	@Column(name = "Description", columnDefinition = "text", length = 65535)
 	private String description;
-	
+
 	@Column(name = "MenuLevel", nullable = false)
 	private byte menuLevel;
-	
-	@Column(name = "ModuleMode", length = 6)
+
+	@Column(name = "ModuleMode", columnDefinition = "ENUM('MODULE','ACTION','PAGE')", length = 6)
 	private String moduleMode;
-	
+
 	@Column(name = "ParentModuleID")
 	private Short parentModuleId;
-	
+
 	@Column(name = "URL", length = 120)
 	private String url;
-	
+
 	@Column(name = "IconPath", length = 120)
 	private String iconPath;
-	
-	@Column(name = "PermissionType", length = 7)
+
+	@Column(name = "PermissionType", columnDefinition = "ENUM('COMPANY','SYSTEM')", length = 7)
 	private String permissionType;
-	
-	@Column(name = "ModuleType", length = 7)
+
+	@Column(name = "ModuleType", columnDefinition = "ENUM('COMPANY','SYSTEM')", length = 7)
 	private String moduleType;
-	
-	@Column(name = "RequiresSelected", length = 7)
+
+	@Column(name = "RequiresSelected", columnDefinition = "ENUM('CLIENT','COMPANY')", length = 7)
 	private String requiresSelected;
-	
-	@Column(name = "MethodCall", length = 65535)
+
+	@Column(name = "MethodCall", columnDefinition = "text", length = 65535)
 	private String methodCall;
-	
-	@Column(name = "RerenderTarget", length = 65535)
+
+	@Column(name = "RerenderTarget", columnDefinition = "text", length = 65535)
 	private String rerenderTarget;
-	
+
 	@Column(name = "ShowInNavigationMenu", nullable = false)
 	private byte showInNavigationMenu;
-	
+
 	@Column(name = "UserTypePermissionSetting", nullable = false, length = 1)
 	private char userTypePermissionSetting;
-	
+
 	@Column(name = "RequiredAccessLevelSetting", nullable = false, length = 1)
 	private char requiredAccessLevelSetting;
-	
+
 	@Column(name = "SystemRequiredFlag", nullable = false)
 	private byte systemRequiredFlag;
-	
+
 	@Column(name = "ShortDisplayName", length = 50)
 	private String shortDisplayName;
-	
+
 	@Column(name = "RecordActiveFlag", nullable = false)
 	private byte recordActiveFlag;
-	
+
 }

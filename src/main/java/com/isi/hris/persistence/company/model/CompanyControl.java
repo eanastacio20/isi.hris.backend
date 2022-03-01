@@ -45,10 +45,10 @@ public class CompanyControl {
 	@Column(name = "DatabaseApplianceID", nullable = false)
 	private int databaseApplianceId;
 
-	@Column(name = "CompanyFileRepository", nullable = false, length = 65535)
+	@Column(name = "CompanyFileRepository", columnDefinition = "text", nullable = false, length = 65535)
 	private String companyFileRepository;
 
-	@Column(name = "WebURL", nullable = false, length = 65535)
+	@Column(name = "WebURL", columnDefinition = "text", nullable = false, length = 65535)
 	private String webUrl;
 
 	@Column(name = "EncodingScheme", nullable = false, length = 40)
@@ -77,10 +77,10 @@ public class CompanyControl {
 	@Column(name = "SQLFullTextLanguage", length = 20)
 	private String sqlfullTextLanguage;
 
-	@Column(name = "Keywords", length = 65535)
+	@Column(name = "Keywords", columnDefinition = "text", length = 65535)
 	private String keywords;
 
-	@Column(name = "Notes", length = 65535)
+	@Column(name = "Notes", columnDefinition = "text", length = 65535)
 	private String notes;
 
 	@Column(name = "CompanyObjectID", nullable = false)
@@ -114,7 +114,7 @@ public class CompanyControl {
 	@Column(name = "TimeZoneID")
 	private Integer timeZoneId;
 
-	@Column(name = "ExportFilePath", length = 65535)
+	@Column(name = "ExportFilePath", columnDefinition = "text", length = 65535)
 	private String exportFilePath;
 
 	@Column(name = "UseSingleVolume")

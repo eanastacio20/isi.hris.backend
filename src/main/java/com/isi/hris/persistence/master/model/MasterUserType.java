@@ -24,41 +24,41 @@ public class MasterUserType {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "UserTypeID", unique = true, nullable = false)
 	private Short userTypeId;
-	
+
 	@Column(name = "UserTypeDescription", unique = true, nullable = false, length = 50)
 	private String userTypeDescription;
-	
+
 	@Column(name = "Description", length = 100)
 	private String description;
-	
+
 	@Column(name = "SuperUserAccess", nullable = false)
 	private byte superUserAccess;
-	
+
 	@Column(name = "SupportAdminAccess", nullable = false)
 	private byte supportAdminAccess;
-	
+
 	@Column(name = "ClientAdminAccess", nullable = false)
 	private byte clientAdminAccess;
-	
+
 	@Column(name = "CompanyAdminAccess", nullable = false)
 	private byte companyAdminAccess;
-	
+
 	@Column(name = "CompanyModuleAccess", nullable = false)
 	private byte companyModuleAccess;
-	
+
 	@Column(name = "CompanyGuestAccess", nullable = false)
 	private byte companyGuestAccess;
-	
+
 	@Column(name = "HasSameLevelAccess", nullable = false)
 	private byte hasSameLevelAccess;
-	
+
 	@Column(name = "IsCompanyRole", nullable = false)
 	private boolean isCompanyRole;
-	
-	@Column(name = "RecordType", length = 8)
+
+	@Column(name = "RecordType", columnDefinition = "ENUM(''ADD','EDIT','DELETE','OTHERS')", length = 8)
 	private String recordType;
-	
+
 	@Column(name = "RecordActiveFlag", nullable = false)
 	private byte recordActiveFlag;
-	
+
 }

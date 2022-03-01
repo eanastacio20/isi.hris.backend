@@ -49,10 +49,10 @@ public class EmployeeMaster {
 	@Column(name = "EmployeeDisplayInitials", length = 5)
 	private String employeeDisplayInitials;
 
-	@Column(name = "Gender", length = 6)
+	@Column(name = "Gender", columnDefinition = "ENUM('Male','Female','Other')", length = 6)
 	private String gender;
 
-	@Column(name = "MaritalStatus", length = 9)
+	@Column(name = "MaritalStatus", columnDefinition = "ENUM('Single','Married','Divorced','Separated','Widowed')", length = 9)
 	private String maritalStatus;
 
 	@Temporal(TemporalType.DATE)

@@ -27,42 +27,42 @@ public class MasterAuditLogReport {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "TransactionID", unique = true, nullable = false)
 	private Long transactionId;
-	
+
 	@Column(name = "CompanyID")
 	private Long companyId;
-	
+
 	@Column(name = "GeneratedByUserID")
 	private Integer generatedByUserId;
-	
-	@Column(name = "ReportType", length = 14)
+
+	@Column(name = "ReportType", columnDefinition = "ENUM('UserAuditTrail','DocAuditTrail','DocUsageByUser','DocUsageByDoc')", length = 14)
 	private String reportType;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "StartTimeStamp", length = 26)
 	private Date startTimeStamp;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "EndTimeStamp", length = 26)
 	private Date endTimeStamp;
-	
-	@Column(name = "ReportStatus", length = 11)
+
+	@Column(name = "ReportStatus", columnDefinition = "ENUM('QUEUED','IN_PROGRESS','COMPLETED','ERROR')", length = 11)
 	private String reportStatus;
-	
-	@Column(name = "FilterParameter", length = 65535)
+
+	@Column(name = "FilterParameter", columnDefinition = "text", length = 65535)
 	private String filterParameter;
-	
-	@Column(name = "CallParameter", length = 65535)
+
+	@Column(name = "CallParameter", columnDefinition = "text", length = 65535)
 	private String callParameter;
-	
-	@Column(name = "Remarks", length = 65535)
+
+	@Column(name = "Remarks", columnDefinition = "text", length = 65535)
 	private String remarks;
-	
+
 	@Column(name = "ReportFileName")
 	private String reportFileName;
-	
+
 	@Column(name = "TotalGeneratedRows")
 	private Long totalGeneratedRows;
-	
+
 	@Column(name = "IsViewed")
 	private Byte isViewed;
 

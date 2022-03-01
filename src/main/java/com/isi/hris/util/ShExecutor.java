@@ -31,7 +31,7 @@ public class ShExecutor {
 			String errStr = reader(isErr);
 			if (errStr != null) {
 				if (!errStr.trim().equals("")) {
-					log.fatal(errStr);
+					log.warn(errStr);
 				}
 			}
 

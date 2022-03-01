@@ -32,7 +32,7 @@ public class EmployeeTimeLog implements Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "employeeId", column = @Column(name = "EmployeeID", nullable = false)),
 			@AttributeOverride(name = "employeeDateIn", column = @Column(name = "EmployeeDateIn", nullable = false, length = 10)),
-			@AttributeOverride(name = "employeeTimeIn", column = @Column(name = "EmployeeTimeIn", nullable = false, length = 16)) })
+			@AttributeOverride(name = "employeeTimeIn", column = @Column(name = "EmployeeTimeIn", columnDefinition = "time", nullable = false, length = 16)) })
 	private EmployeeTimeLogId id;
 
 	@Temporal(TemporalType.DATE)

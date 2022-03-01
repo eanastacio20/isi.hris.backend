@@ -32,11 +32,11 @@ public class EmployeeTimeLogAudit implements Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "employeeId", column = @Column(name = "EmployeeID", nullable = false)),
 			@AttributeOverride(name = "employeeDate", column = @Column(name = "EmployeeDate", nullable = false, length = 10)),
-			@AttributeOverride(name = "employeeTime", column = @Column(name = "EmployeeTime", nullable = false, length = 16)),
+			@AttributeOverride(name = "employeeTime", column = @Column(name = "EmployeeTime", columnDefinition = "time", nullable = false, length = 16)),
 			@AttributeOverride(name = "sequenceId", column = @Column(name = "SequenceID", nullable = false)) })
 	private EmployeeTimeLogAuditId id;
 
-	@Column(name = "ActionType", length = 7)
+	@Column(name = "ActionType", columnDefinition = "ENUM('Deleted','Changed','New')", length = 7)
 	private String actionType;
 
 	@Temporal(TemporalType.DATE)

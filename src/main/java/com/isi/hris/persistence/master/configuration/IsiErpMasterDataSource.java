@@ -8,22 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.isi.hris.configurations.ISIHrisApplicationProperties;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = "com.isi.hris.persistence.master", transactionManagerRef = "transactionManager")
-public class IsiErpMasterDBConfig {
+public class IsiErpMasterDataSource {
 	
 	@Autowired
-	private Environment env;
+	ISIHrisApplicationProperties appProperties;
 
 	@Primary
 	@Bean(name = "entityManagerFactory")
@@ -35,9 +37,9 @@ public class IsiErpMasterDBConfig {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
 		HashMap<String, Object> properties = new HashMap<>();
-		properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-		properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-		properties.put("spring.jpa.hibernate.naming.physical-strategy", env.getProperty("org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"));
+		properties.put("hibernate.hbm2ddl.auto", "validate");
+		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+		properties.put("spring.jpa.hibernate.naming.physical-strategy", "org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl");
 		em.setJpaPropertyMap(properties);
 		em.setPersistenceUnitName("ErpMaster");
 		return em;
@@ -46,12 +48,14 @@ public class IsiErpMasterDBConfig {
 	@Primary
 	@Bean(name = "dataSource")
 	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUrl(env.getProperty("spring.master.datasource.url"));
-		dataSource.setUsername(env.getProperty("spring.master.datasource.username"));
-		dataSource.setPassword(env.getProperty("spring.master.datasource.password"));
-		dataSource.setDriverClassName(env.getProperty("spring.master.datasource.driver-class-name"));
-		return dataSource;
+		HikariConfig config = new HikariConfig();
+		config.setJdbcUrl(appProperties.getMasterDatasourceUrl());
+		config.setUsername(appProperties.getMasterDatasourceUsername());
+		config.setPassword(appProperties.getCompanyDatasourcePassword());
+		config.setDriverClassName(appProperties.getCompanyDatasourceDriverClassName());
+		HikariDataSource ds = new HikariDataSource(config);
+		return ds;
+
 	}
 
 	@Primary

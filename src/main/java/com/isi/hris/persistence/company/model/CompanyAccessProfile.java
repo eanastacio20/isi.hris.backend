@@ -33,76 +33,74 @@ public class CompanyAccessProfile {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "ProfileID", unique = true, nullable = false)
 	private Short profileId;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DefaultUserType")
 	private CompanyAccessProfile companyAccessProfile;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CreatedByUserID")
 	private CompanyUser companyUser;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CompanyID", nullable = false)
 	private CompanyControl companyControl;
-	
+
 	@Column(name = "ProfileName", length = 50)
 	private String profileName;
-	
+
 	@Column(name = "Description")
 	private String description;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CreatedTimeStamp", nullable = false, length = 26)
 	private Date createdTimeStamp;
-	
-	@Column(name = "Remarks", length = 65535)
+
+	@Column(name = "Remarks", columnDefinition = "text", length = 65535)
 	private String remarks;
-	
+
 	@Column(name = "Restricted", nullable = false)
 	private boolean restricted;
-	
+
 	@Column(name = "CopyFromProfileId")
 	private Short copyFromProfileId;
-	
+
 	@Column(name = "CopyFromProfileName")
 	private String copyFromProfileName;
-	
+
 	@Column(name = "CopyFromHostId")
 	private Integer copyFromHostId;
-	
+
 	@Column(name = "CopyFromClientId")
 	private Integer copyFromClientId;
-	
+
 	@Column(name = "CopyFromCompanyId")
 	private Integer copyFromCompanyId;
-	
+
 	@Column(name = "EmailAddress", length = 120)
 	private String emailAddress;
-	
+
 	@Column(name = "MobileCountryCode", length = 5)
 	private String mobileCountryCode;
-	
+
 	@Column(name = "MobileNumber", length = 15)
 	private String mobileNumber;
-	
+
 	@Column(name = "IsCompanyRole")
 	private Boolean isCompanyRole;
-	
+
 	@Column(name = "RefUserTypeID")
 	private Short refUserTypeId;
-	
+
 	@Column(name = "HasAdminAccess")
 	private Boolean hasAdminAccess;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyAccessProfile")
-	private Set<CompanyAccessPermission> companyAccessPermissions = new HashSet<CompanyAccessPermission>(
-			0);
-	
+	private Set<CompanyAccessPermission> companyAccessPermissions = new HashSet<CompanyAccessPermission>(0);
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyAccessProfile")
-	private Set<CompanyAccessProfile> companyAccessProfiles = new HashSet<CompanyAccessProfile>(
-			0);
-	
+	private Set<CompanyAccessProfile> companyAccessProfiles = new HashSet<CompanyAccessProfile>(0);
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyAccessProfile")
 	private Set<CompanyUser> companyUsers = new HashSet<CompanyUser>(0);
 

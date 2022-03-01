@@ -31,7 +31,7 @@ public class CompanyUserAuditTrail {
 	@Column(name = "ModifiedUserID", nullable = false)
 	private int modifiedUserId;
 
-	@Column(name = "ActionType", length = 6)
+	@Column(name = "ActionType", columnDefinition = "ENUM('ADD','EDIT','DELETE','OTHERS')", length = 6)
 	private String actionType;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -41,7 +41,7 @@ public class CompanyUserAuditTrail {
 	@Column(name = "LastModifiedByUserID", nullable = false)
 	private int lastModifiedByUserId;
 
-	@Column(name = "Remarks", length = 65535)
+	@Column(name = "Remarks", columnDefinition = "text", length = 65535)
 	private String remarks;
 
 }

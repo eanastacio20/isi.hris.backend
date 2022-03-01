@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.isi.hris.persistence.company.model.CompanyPayCodeMaster;
 import com.isi.hris.persistence.master.model.MasterModule;
 import com.isi.hris.services.DatabaseCreatorService;
@@ -18,9 +18,6 @@ import com.isi.hris.services.SampleTestServices;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @RestController
 @RequestMapping("/isi-hris")
@@ -56,6 +53,14 @@ public class SampleTestController {
 				dbdto.getDbTemplate(), dbdto.getDumpFileDestination(), dbdto.getNewDatabaseName(),
 				dbdto.getCharacterSet());
 	}
+	
+	
+	@GetMapping("/testPool")
+	public void testConnnectionPool(@RequestParam("cid") Integer companyId) {
+		sts.testPool(companyId);
+	}
+	
+	
 
 	@Data
 	@AllArgsConstructor
